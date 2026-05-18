@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { PageTransition } from "@/app/components/page-transition";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -34,7 +35,9 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="flex min-h-dvh flex-col bg-zinc-950">{children}</body>
+      <body className="flex min-h-dvh flex-col overflow-hidden bg-zinc-950">
+        <PageTransition>{children}</PageTransition>
+      </body>
     </html>
   );
 }

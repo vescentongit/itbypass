@@ -339,7 +339,7 @@ export default function SearchPage() {
           type="button"
           disabled={!canContinue || isRouting}
           onClick={handleContinue}
-          className="mx-auto mt-[15px] h-[30px] w-[110px] rounded-full border border-white/18 bg-[#72809b]/58 text-[13px] font-semibold text-white/28 shadow-[0_5px_12px_rgba(0,0,0,0.25),inset_0_1px_0_rgba(255,255,255,0.14)] transition-colors enabled:bg-[#2f5eb8] enabled:text-white enabled:hover:bg-[#3b6cc8]"
+          className="mx-auto mt-[15px] h-[30px] w-[110px] rounded-full border border-white/18 bg-[#72809b]/58 text-[13px] font-semibold text-white/28 shadow-[0_5px_12px_rgba(0,0,0,0.25),inset_0_1px_0_rgba(255,255,255,0.14)] transition-[background-color,transform,color] duration-200 enabled:bg-[#2f5eb8] enabled:text-white enabled:hover:bg-[#3b6cc8] enabled:active:scale-[0.97]"
         >
           {isRouting ? "..." : "Lanjut"}
         </button>

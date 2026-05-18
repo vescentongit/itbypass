@@ -155,7 +155,7 @@ export function HomeScreen() {
           <div className="shrink-0 px-4 pb-[max(0.5rem,env(safe-area-inset-bottom))] pt-2">
             <Link
               href="/search"
-              className="where-to-bar flex min-h-[3.25rem] items-center gap-3 rounded-full border border-white/10 bg-[#4068cd]/80 px-4 py-2.5 shadow-[0_4px_24px_-4px_rgba(0,0,0,0.5)] backdrop-blur-md transition-colors hover:bg-[#4b73d7]/85 active:bg-[#3159ba]/90"
+              className="where-to-bar flex min-h-[3.25rem] items-center gap-3 rounded-full border border-white/10 bg-[#4068cd]/80 px-4 py-2.5 shadow-[0_4px_24px_-4px_rgba(0,0,0,0.5)] backdrop-blur-md transition-[background-color,transform] duration-200 hover:bg-[#4b73d7]/85 active:scale-[0.985] active:bg-[#3159ba]/90"
               aria-label="Open route search"
             >
               <span

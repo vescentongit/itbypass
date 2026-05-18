@@ -1,6 +1,9 @@
 "use client";
 
-import { getPathPositions } from "@/app/data/campus-route-api";
+import {
+  getPathPositions,
+  isCampusLocationName,
+} from "@/app/data/campus-route-api";
 import {
   CircleMarker,
   MapContainer,
@@ -46,18 +49,25 @@ export function RouteResultMap({ path }: { path: string[] }) {
       {positions.length > 1 && (
         <Polyline positions={positions} pathOptions={routePath} />
       )}
-      {positions.map((position, index) => (
-        <CircleMarker
-          key={`${position[0]}-${position[1]}`}
-          center={position}
-          radius={index === 0 || index === positions.length - 1 ? 8 : 5}
-          pathOptions={endpointPath}
-        >
-          <Tooltip direction="top" offset={[0, -8]} opacity={0.95}>
-            {path[index]}
-          </Tooltip>
-        </CircleMarker>
-      ))}
+      {positions.map((position, index) => {
+        const isEndpoint = index === 0 || index === positions.length - 1;
+        const isNamedLocation = isCampusLocationName(path[index]);
+
+        if (!isEndpoint && !isNamedLocation) return null;
+
+        return (
+          <CircleMarker
+            key={`${position[0]}-${position[1]}`}
+            center={position}
+            radius={isEndpoint ? 8 : 5}
+            pathOptions={endpointPath}
+          >
+            <Tooltip direction="top" offset={[0, -8]} opacity={0.95}>
+              {path[index]}
+            </Tooltip>
+          </CircleMarker>
+        );
+      })}
     </MapContainer>
   );
 }
