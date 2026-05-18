@@ -1,7 +1,9 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import Link from "next/link";
 import { useCallback, useLayoutEffect, useRef, useState } from "react";
+import { CAMPUS_LOCATIONS } from "@/app/data/campus-locations";
 
 const HomeMapView = dynamic(
   () =>
@@ -16,12 +18,17 @@ const HomeMapView = dynamic(
   },
 );
 
-const HISTORY_PLACEHOLDERS = [
-  { title: "Labtek - R. 9674", subtitle: "Hari ini, 09.00 WIB" },
-  { title: "GKU 2  - K2. 9653", subtitle: "Kemarin, 12.00 WIB" },
-  { title: "GKU 1  - K1. 9677", subtitle: "4 hari lalu, 14.00 WIB" },
-  { title: "Perpustakaan", subtitle: "6 hari lalu, 14.00 WIB" },
-];
+const HISTORY_ITEMS = [
+  { locationName: "Gedung Kuliah Umum II", subtitle: "Hari ini, 09.00 WIB" },
+  { locationName: "Labtek IB", subtitle: "Kemarin, 12.00 WIB" },
+  { locationName: "Rektorat", subtitle: "4 hari lalu, 14.00 WIB" },
+  { locationName: "KOICA", subtitle: "6 hari lalu, 14.00 WIB" },
+].map((item) => ({
+  title:
+    CAMPUS_LOCATIONS.find((location) => location.name === item.locationName)
+      ?.name ?? item.locationName,
+  subtitle: item.subtitle,
+}));
 
 /** Tinggi sheet saat menempel ke bawah (handle + search saja). */
 const COLLAPSED_PX = 158;
@@ -44,7 +51,6 @@ function useExpandedMaxPx() {
 }
 
 export function HomeScreen() {
-  const [destination, setDestination] = useState("");
   const expandedMaxPx = useExpandedMaxPx();
   const [heightPx, setHeightPx] = useState(COLLAPSED_PX);
   const [isDragging, setIsDragging] = useState(false);
@@ -147,34 +153,19 @@ export function HomeScreen() {
           </div>
 
           <div className="shrink-0 px-4 pb-[max(0.5rem,env(safe-area-inset-bottom))] pt-2">
-            <div className="where-to-bar flex min-h-[3.25rem] items-center gap-3 rounded-full px-4 py-2.5 bg-[#4068cd]/80 shadow-[0_4px_24px_-4px_rgba(0,0,0,0.5)] border border-white/10 backdrop-blur-md">
+            <Link
+              href="/search"
+              className="where-to-bar flex min-h-[3.25rem] items-center gap-3 rounded-full border border-white/10 bg-[#4068cd]/80 px-4 py-2.5 shadow-[0_4px_24px_-4px_rgba(0,0,0,0.5)] backdrop-blur-md transition-colors hover:bg-[#4b73d7]/85 active:bg-[#3159ba]/90"
+              aria-label="Open route search"
+            >
               <span
                 className="inline-flex h-5 w-5 shrink-0 rounded-full border-[3px] border-cyan-400 bg-transparent"
                 aria-hidden
               />
-              <input
-                type="search"
-                enterKeyHint="search"
-                value={destination}
-                onChange={(e) => setDestination(e.target.value)}
-                placeholder="Where to ?"
-                className="where-to-input min-w-0 flex-1 cursor-text appearance-none bg-transparent text-base font-medium text-white caret-white placeholder:text-white placeholder:opacity-90 focus:outline-none focus-visible:outline-none focus:ring-0 focus-visible:ring-0 focus:ring-offset-0 focus-visible:ring-offset-0 [&::-webkit-search-cancel-button]:hidden"
-                aria-label="Search destination"
-              />
-              {destination && (
-                <button
-                  type="button"
-                  onClick={() => setDestination("")}
-                  className="shrink-0 p-1 text-white/50 hover:text-white/90 transition-colors"
-                  aria-label="Clear search"
-                >
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <line x1="18" y1="6" x2="6" y2="18" />
-                    <line x1="6" y1="6" x2="18" y2="18" />
-                  </svg>
-                </button>
-              )}
-            </div>
+              <span className="where-to-input min-w-0 flex-1 text-left text-base font-medium text-white/90">
+                Where to ?
+              </span>
+            </Link>
           </div>
 
           <div className="sheet-scroll min-h-0 flex-1 overflow-y-auto overscroll-y-contain px-4 pb-[max(0.75rem,env(safe-area-inset-bottom))] [-webkit-overflow-scrolling:touch] hide-scrollbar">
@@ -182,12 +173,11 @@ export function HomeScreen() {
               History
             </h2>
             <ul className="divide-y divide-white/20 pb-1">
-              {HISTORY_PLACEHOLDERS.map((item) => (
+              {HISTORY_ITEMS.map((item) => (
                 <li key={item.title}>
                   <button
                     type="button"
                     className="w-full py-3.5 text-left transition-colors hover:bg-white/5 active:bg-white/10 flex flex-col justify-center"
-                    onClick={() => setDestination(item.title)}
                   >
                     <span className="text-[15px] font-bold text-white">{item.title}</span>
                     <span className="text-[12px] font-semibold mt-1 text-white/90">{item.subtitle}</span>

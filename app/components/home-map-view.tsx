@@ -1,22 +1,18 @@
 "use client";
 
-import { MapContainer, CircleMarker, TileLayer } from "react-leaflet";
+import { CAMPUS_LOCATIONS } from "@/app/data/campus-locations";
+import { CircleMarker, MapContainer, TileLayer, Tooltip } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 
-const CENTER: [number, number] = [-6.9355, 107.7725];
-
-const SAMPLE_MARKERS: [number, number][] = [
-  [-6.9354, 107.7724],
-  [-6.9412, 107.781],
-];
+const CENTER: [number, number] = [-6.9291, 107.7691];
 
 /** OSMF tile server — follow https://operations.osmfoundation.org/policies/tiles/ (fair use). */
 const OSM_TILE = "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
 
 const markerPath = {
-  color: "#b91c1c",
-  fillColor: "#dc2626",
-  fillOpacity: 1,
+  color: "#1d4ed8",
+  fillColor: "#60a5fa",
+  fillOpacity: 0.92,
   weight: 2,
 };
 
@@ -34,13 +30,17 @@ export function HomeMapView() {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url={OSM_TILE}
       />
-      {SAMPLE_MARKERS.map((position, i) => (
+      {CAMPUS_LOCATIONS.map((location) => (
         <CircleMarker
-          key={i}
-          center={position}
-          radius={9}
+          key={location.name}
+          center={location.position}
+          radius={7}
           pathOptions={markerPath}
-        />
+        >
+          <Tooltip direction="top" offset={[0, -8]} opacity={0.95}>
+            {location.name}
+          </Tooltip>
+        </CircleMarker>
       ))}
     </MapContainer>
   );
