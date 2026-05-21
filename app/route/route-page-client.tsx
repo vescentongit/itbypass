@@ -27,12 +27,12 @@ const ROUTE_OPTIONS: { mode: RouteMode; title: string; subtitle: string }[] = [
   {
     mode: "fast",
     title: "Tercepat",
-    subtitle: "elevasi tidak dipedulikan",
+    subtitle: "Rute tercepat.",
   },
   {
     mode: "flat",
     title: "Terlandai",
-    subtitle: "elevasi terendah",
+    subtitle: "Rute terlandai.",
   },
 ];
 
@@ -198,9 +198,8 @@ export function RoutePageClient() {
                 key={option.mode}
                 type="button"
                 onClick={() => setSelectedMode(option.mode)}
-                className={`relative flex w-full flex-col py-3 text-left transition-colors hover:bg-white/5 ${
-                  isSelected ? "text-[#3b82f6]" : "text-white"
-                }`}
+                className={`relative flex w-full flex-col py-3 text-left transition-colors hover:bg-white/5 ${isSelected ? "text-[#3b82f6]" : "text-white"
+                  }`}
               >
                 {isSelected && (
                   <span className="absolute bottom-3 left-[-7px] top-3 w-[3px] rounded-full bg-[#3b82f6]" />
