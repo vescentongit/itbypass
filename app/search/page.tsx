@@ -317,7 +317,7 @@ export default function SearchPage() {
                     <span className="block truncate text-[14px] font-bold">
                       {location.name}
                     </span>
-                    <span className="mt-[4px] block text-[11px] font-semibold text-white/48">
+                    <span className="mt-[4px] block truncate text-[11px] font-semibold text-white/48">
                       {location.address}
                     </span>
                   </span>

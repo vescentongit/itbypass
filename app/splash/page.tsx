@@ -38,11 +38,6 @@ export default function SplashPage() {
           Skip
         </button> */}
       </main>
-
-      <div
-        className="relative z-10 mx-auto mb-2 h-1 w-28 rounded-full bg-white/25"
-        aria-hidden
-      />
     </div>
   );
 }

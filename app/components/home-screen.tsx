@@ -191,10 +191,6 @@ export function HomeScreen() {
               </Link>
             </div>
           </div>
-
-          <div className="shrink-0 flex justify-center pb-2 pt-1 pointer-events-none z-10 bg-transparent">
-            <div className="h-1.5 w-28 rounded-full bg-white/80" />
-          </div>
         </div>
       </div>
     </div>
