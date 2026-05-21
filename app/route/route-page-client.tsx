@@ -27,12 +27,12 @@ const ROUTE_OPTIONS: { mode: RouteMode; title: string; subtitle: string }[] = [
   {
     mode: "fast",
     title: "Tercepat",
-    subtitle: "Rute tercepat.",
+    subtitle: "Rute tercepat",
   },
   {
     mode: "flat",
     title: "Terlandai",
-    subtitle: "Rute terlandai.",
+    subtitle: "Rute terlandai",
   },
 ];
 
