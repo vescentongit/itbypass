@@ -1,3 +1,20 @@
 {
-    "editor.wordWrap": "on"
+    "editor.wordWrap": "on",
+    "background.enabled": true,
+    "background.fullscreen": {
+        "images": ["C:\\Users\\Orkhan\\Pictures\\Wallpaper\\Fullscreen"],
+        "opacity": 0.1,
+        "size": "cover",
+        "position": "center",
+        "interval": 0,
+        "random": false
+    },
+    "background.sidebar": {
+        "images": ["C:\\Users\\Orkhan\\Pictures\\Wallpaper\\Sidebar"],
+        "opacity": 0.1,
+        "size": "cover",
+        "position": "center",
+        "interval": 0,
+        "random": false
+    }
 }
