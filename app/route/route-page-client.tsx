@@ -144,7 +144,6 @@ export function RoutePageClient() {
         <RouteResultMap path={activeRoute?.path ?? []} />
       </div>
 
-      {/* Top half-circle blue gradient */}
       <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-56 overflow-hidden">
         <div className="absolute -top-[100px] left-1/2 h-[210px] w-[90%] -translate-x-1/2 rounded-[100%] bg-[#3b82f6]/70 blur-[40px]" />
       </div>
@@ -176,7 +175,7 @@ export function RoutePageClient() {
       <section className="relative z-20 mt-auto rounded-t-[28px] border border-white/18 bg-[linear-gradient(to_bottom,rgba(49,52,72,0.76),rgba(2,6,23,0.96)_48%,#020617_100%)] px-5 pb-[max(24px,env(safe-area-inset-bottom))] pt-2 shadow-2xl backdrop-blur-md">
         <div className="mx-auto mb-6 h-1 w-28 rounded-full bg-white/80" />
 
-        <h2 className="truncate text-[21px] font-bold tracking-[-0.03em]">
+        <h2 className="overflow-x-auto whitespace-nowrap text-[21px] font-bold tracking-[-0.03em] hide-scrollbar">
           {routeTitle}
         </h2>
 
