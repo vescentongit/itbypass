@@ -186,9 +186,9 @@ export function HomeScreen() {
               ))}
             </ul>
             <div className="mt-2 flex justify-center pb-4 pt-2 border-t border-white/20">
-              <button className="text-[13px] font-medium text-white/40 hover:text-white/60 transition-colors">
+              <Link href="/search" className="text-[13px] font-medium text-white/40 hover:text-white/60 transition-colors">
                 Lengkapnya..
-              </button>
+              </Link>
             </div>
           </div>
 

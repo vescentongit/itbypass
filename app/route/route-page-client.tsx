@@ -53,59 +53,58 @@ export function RoutePageClient() {
   const searchParams = useSearchParams();
   const start = searchParams.get("start") ?? "";
   const goal = searchParams.get("goal") ?? "";
-  const [route, setRoute] = useState<RouteApiResult | null>(() =>
-    readStoredRoute(),
-  );
-  const [selectedMode, setSelectedMode] = useState<RouteMode>(
-    () => readStoredRoute()?.mode ?? "flat",
-  );
+
+  const [routes, setRoutes] = useState<Record<RouteMode, RouteApiResult | null>>(() => {
+    const stored = readStoredRoute();
+    if (stored && stored.start === start && stored.goal === goal) {
+      return {
+        fast: stored.mode === "fast" ? stored : null,
+        flat: stored.mode === "flat" ? stored : null,
+      };
+    }
+    return { fast: null, flat: null };
+  });
+
+  const [selectedMode, setSelectedMode] = useState<RouteMode>(() => {
+    const stored = readStoredRoute();
+    if (stored && stored.start === start && stored.goal === goal) {
+      return stored.mode;
+    }
+    return "flat";
+  });
+
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
   const routeTitle = useMemo(() => {
-    if (!route) return "Your location -> Tujuan";
-    return `${route.start} -> ${route.goal}`;
-  }, [route]);
+    if (!start || !goal) return "Your location -> Tujuan";
+    return `${start} -> ${goal}`;
+  }, [start, goal]);
 
-  const calculateRoute = useCallback(async (mode: RouteMode) => {
+  // Pre-fetch both routes on mount / search param changes
+  useEffect(() => {
     if (!start || !goal) return;
 
-    setSelectedMode(mode);
+    let cancelled = false;
     setIsLoading(true);
     setError("");
 
-    try {
-      const result = await requestCampusRoute({ start, goal, mode });
-      setRoute(result);
-      window.sessionStorage.setItem(
-        "itbypass:lastRoute",
-        JSON.stringify(result),
-      );
-    } catch (caught) {
-      setError(
-        caught instanceof Error
-          ? caught.message
-          : "Gagal menghitung rute dari backend",
-      );
-    } finally {
-      setIsLoading(false);
-    }
-  }, [goal, start]);
-
-  useEffect(() => {
-    if (!start || !goal) return;
-    if (route?.start === start && route.goal === goal) return;
-
-    let cancelled = false;
-
-    requestCampusRoute({ start, goal, mode: "flat" })
-      .then((result) => {
+    Promise.all([
+      requestCampusRoute({ start, goal, mode: "fast" }),
+      requestCampusRoute({ start, goal, mode: "flat" }),
+    ])
+      .then(([fastRoute, flatRoute]) => {
         if (cancelled) return;
-        setSelectedMode("flat");
-        setRoute(result);
+        setRoutes({
+          fast: fastRoute,
+          flat: flatRoute,
+        });
+
+        // Store the current selected mode's route
+        const activeRoute = selectedMode === "fast" ? fastRoute : flatRoute;
         window.sessionStorage.setItem(
           "itbypass:lastRoute",
-          JSON.stringify(result),
+          JSON.stringify(activeRoute),
         );
       })
       .catch((caught) => {
@@ -115,17 +114,34 @@ export function RoutePageClient() {
             ? caught.message
             : "Gagal menghitung rute dari backend",
         );
+      })
+      .finally(() => {
+        if (cancelled) return;
+        setIsLoading(false);
       });
 
     return () => {
       cancelled = true;
     };
-  }, [goal, route?.goal, route?.start, start]);
+  }, [start, goal]);
+
+  // Update stored session route when user switches active mode
+  useEffect(() => {
+    const activeRoute = routes[selectedMode];
+    if (activeRoute) {
+      window.sessionStorage.setItem(
+        "itbypass:lastRoute",
+        JSON.stringify(activeRoute),
+      );
+    }
+  }, [selectedMode, routes]);
+
+  const activeRoute = routes[selectedMode];
 
   return (
     <main className="relative mx-auto flex h-dvh w-full max-w-md flex-col overflow-hidden bg-[#020617] text-white">
       <div className="absolute inset-0 z-0 bg-zinc-300">
-        <RouteResultMap path={route?.path ?? []} />
+        <RouteResultMap path={activeRoute?.path ?? []} />
       </div>
 
       <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-48 bg-gradient-to-b from-[#3b82f6]/35 via-white/15 to-transparent" />
@@ -174,14 +190,14 @@ export function RoutePageClient() {
         <div className="mt-1 divide-y divide-white/45 border-b border-white/45">
           {ROUTE_OPTIONS.map((option) => {
             const isSelected = selectedMode === option.mode;
-            const minutes =
-              route?.mode === option.mode ? route.minutes : undefined;
+            const optionRoute = routes[option.mode];
+            const minutes = optionRoute?.minutes;
 
             return (
               <button
                 key={option.mode}
                 type="button"
-                onClick={() => calculateRoute(option.mode)}
+                onClick={() => setSelectedMode(option.mode)}
                 className={`relative flex w-full flex-col py-3 text-left transition-colors hover:bg-white/5 ${
                   isSelected ? "text-[#3b82f6]" : "text-white"
                 }`}
@@ -194,9 +210,9 @@ export function RoutePageClient() {
                   <span className="font-medium">({option.subtitle})</span>
                 </span>
                 <span className="mt-1 text-[11px] font-bold text-white">
-                  {isLoading && isSelected
+                  {isLoading && !minutes
                     ? "Menghitung..."
-                    : `${minutes ?? route?.minutes ?? 5} menit`}
+                    : `${minutes ?? 5} menit`}
                 </span>
               </button>
             );

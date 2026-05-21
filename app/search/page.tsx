@@ -199,22 +199,20 @@ export default function SearchPage() {
               <button
                 type="button"
                 onClick={() => setActiveField("start")}
-                className={`h-9 rounded-full text-[13px] font-bold transition-colors ${
-                  activeField === "start"
-                    ? "bg-[#2f5eb8] text-white"
-                    : "text-white/58"
-                }`}
+                className={`h-9 rounded-full text-[13px] font-bold transition-colors ${activeField === "start"
+                  ? "bg-[#2f5eb8] text-white"
+                  : "text-white/58"
+                  }`}
               >
                 Lokasi awal
               </button>
               <button
                 type="button"
                 onClick={() => setActiveField("destination")}
-                className={`h-9 rounded-full text-[13px] font-bold transition-colors ${
-                  activeField === "destination"
-                    ? "bg-[#2f5eb8] text-white"
-                    : "text-white/58"
-                }`}
+                className={`h-9 rounded-full text-[13px] font-bold transition-colors ${activeField === "destination"
+                  ? "bg-[#2f5eb8] text-white"
+                  : "text-white/58"
+                  }`}
               >
                 Tujuan
               </button>
@@ -261,7 +259,7 @@ export default function SearchPage() {
         <div className="space-y-[9px]">
           <FieldInput
             value={start}
-            placeholder="Lokasi saya"
+            placeholder="Lokasi Awal"
             active={activeField === "start"}
             autoFocus
             onFocus={() => setActiveField("start")}
@@ -269,7 +267,7 @@ export default function SearchPage() {
           />
           <FieldInput
             value={destination}
-            placeholder="Pilih Tujuan"
+            placeholder="Lokasi Tujuan"
             active={activeField === "destination"}
             onFocus={() => setActiveField("destination")}
             onChange={setDestination}
@@ -279,12 +277,12 @@ export default function SearchPage() {
         <button
           type="button"
           onClick={() => setIsPickingMap(true)}
-          className="mt-[12px] inline-flex h-[24px] w-fit items-center gap-[5px] rounded-full border border-white/20 bg-[#55637c]/80 px-[10px] text-[10px] font-bold text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.12)] transition-colors hover:bg-[#61718c]/85"
+          className="mt-[14px] inline-flex h-[36px] w-fit items-center gap-[4px] rounded-full border border-white/20 bg-[#55637c]/80 px-[16px] text-[12px] font-bold text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.12)] transition-colors hover:bg-[#61718c]/85"
         >
           <svg
             aria-hidden
-            width="13"
-            height="13"
+            width="16"
+            height="25"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -295,7 +293,7 @@ export default function SearchPage() {
             <path d="M12 21s7-4.7 7-11a7 7 0 1 0-14 0c0 6.3 7 11 7 11Z" />
             <circle cx="12" cy="10" r="2.5" />
           </svg>
-          Pilih lewat peta
+          Pilih di Maps
         </button>
 
         <div className="mt-[18px] min-h-0 overflow-y-auto border-t border-white/35 pr-[3px] [scrollbar-color:rgba(255,255,255,0.78)_rgba(18,24,38,0.55)] [scrollbar-width:thin]">
@@ -305,7 +303,7 @@ export default function SearchPage() {
                 <button
                   type="button"
                   onClick={() => selectLocation(location)}
-                  className="grid w-full grid-cols-[42px_1fr] gap-1 py-[8px] text-left transition-colors hover:bg-white/5 active:bg-white/10"
+                  className="grid w-full grid-cols-[42px_1fr] gap-2 py-[8px] pl-[14px] pr-[8px] text-left transition-colors hover:bg-white/5 active:bg-white/10"
                 >
                   <span className="flex flex-col leading-none">
                     <span className="text-[24px] font-bold tracking-[-0.06em]">
@@ -339,7 +337,7 @@ export default function SearchPage() {
           type="button"
           disabled={!canContinue || isRouting}
           onClick={handleContinue}
-          className="mx-auto mt-[15px] h-[30px] w-[110px] rounded-full border border-white/18 bg-[#72809b]/58 text-[13px] font-semibold text-white/28 shadow-[0_5px_12px_rgba(0,0,0,0.25),inset_0_1px_0_rgba(255,255,255,0.14)] transition-[background-color,transform,color] duration-200 enabled:bg-[#2f5eb8] enabled:text-white enabled:hover:bg-[#3b6cc8] enabled:active:scale-[0.97]"
+          className="mx-auto mt-[15px] h-[100px] w-[140px] rounded-full border border-white/18 bg-[#72809b]/58 text-[15px] font-semibold text-white/28 shadow-[0_5px_12px_rgba(0,0,0,0.25),inset_0_1px_0_rgba(255,255,255,0.14)] transition-[background-color,transform,color] duration-200 enabled:bg-[#2f5eb8] enabled:text-white enabled:hover:bg-[#3b6cc8] enabled:active:scale-[0.97]"
         >
           {isRouting ? "..." : "Lanjut"}
         </button>

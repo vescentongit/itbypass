@@ -13,10 +13,10 @@ export const CAMPUS_LOCATIONS: CampusLocation[] = [
     position: [-6.933582, 107.7683275],
   },
   {
-    distance: "0,1",
-    name: "Parkir Motor Mahasiswa",
+    distance: "0,3",
+    name: "Parkiran Motor",
     address: "[Alamat]",
-    position: [-6.9314294, 107.7713424],
+    position: [-6.9310512, 107.7682313],
   },
   {
     distance: "1",
@@ -43,10 +43,28 @@ export const CAMPUS_LOCATIONS: CampusLocation[] = [
     position: [-6.9259237, 107.7690724],
   },
   {
+    distance: "1,6",
+    name: "GOR Tenis Meja",
+    address: "[Alamat]",
+    position: [-6.9252373, 107.7687362],
+  },
+  {
+    distance: "1,7",
+    name: "Lapangan Sepak Bola",
+    address: "[Alamat]",
+    position: [-6.9255779, 107.7678078],
+  },
+  {
     distance: "1,4",
     name: "Gedung Kuliah Umum 3",
     address: "[Alamat]",
     position: [-6.927154, 107.7702549],
+  },
+  {
+    distance: "1,3",
+    name: "Amphiteater",
+    address: "[Alamat]",
+    position: [-6.9272237, 107.7689357],
   },
   {
     distance: "1",

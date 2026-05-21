@@ -10,8 +10,8 @@ const CENTER: [number, number] = [-6.9291, 107.7691];
 const OSM_TILE = "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
 
 const markerPath = {
-  color: "#1d4ed8",
-  fillColor: "#60a5fa",
+  color: "#83a2f9",
+  fillColor: "#ffffff",
   fillOpacity: 0.92,
   weight: 2,
 };

@@ -1,5 +1,6 @@
 "use client";
 
+import { useMemo } from "react";
 import {
   getPathPositions,
   isCampusLocationName,
@@ -17,20 +18,22 @@ const CENTER: [number, number] = [-6.9291, 107.7691];
 const OSM_TILE = "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
 
 const routePath = {
-  color: "#2563eb",
-  weight: 5,
+  color: "#83a2f9",
+  weight: 4,
   opacity: 0.95,
+  lineCap: "round" as const,
+  lineJoin: "round" as const,
 };
 
 const endpointPath = {
-  color: "#020617",
-  fillColor: "#14f1d9",
+  color: "#83a2f9",
+  fillColor: "#ffffff",
   fillOpacity: 1,
   weight: 3,
 };
 
 export function RouteResultMap({ path }: { path: string[] }) {
-  const positions = getPathPositions(path);
+  const positions = useMemo(() => getPathPositions(path), [path]);
   const center = positions[0] ?? CENTER;
 
   return (
