@@ -35,8 +35,7 @@ type GraphPoint = {
   elevation: number;
 };
 
-const BACKEND_URL =
-  process.env.NEXT_PUBLIC_BACKEND_URL ?? "http://localhost:8000";
+const BACKEND_URL = "/api";
 
 const ELEVATION_BY_NAME: Record<string, number> = {
   "Gerbang Utama ITB Jatinangor": 718,
