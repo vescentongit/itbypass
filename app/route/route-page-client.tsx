@@ -144,7 +144,10 @@ export function RoutePageClient() {
         <RouteResultMap path={activeRoute?.path ?? []} />
       </div>
 
-      <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-48 bg-gradient-to-b from-[#3b82f6]/35 via-white/15 to-transparent" />
+      {/* Top half-circle blue gradient */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-56 overflow-hidden">
+        <div className="absolute -top-[100px] left-1/2 h-[210px] w-[90%] -translate-x-1/2 rounded-[100%] bg-[#3b82f6]/70 blur-[40px]" />
+      </div>
 
       <header className="relative z-20 flex h-[96px] items-start justify-center px-5 pt-[max(2rem,env(safe-area-inset-top))]">
         <Link
