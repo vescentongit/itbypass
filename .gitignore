@@ -51,3 +51,6 @@ scripts/generate_project_summary_pdf.py
 
 # docs
 /docs
+
+# test routes
+./test_routes.py
