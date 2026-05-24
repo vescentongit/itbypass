@@ -1,7 +1,6 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
 # dependencies
 /node_modules
+/.codex_deps/
 /backend/.deps/
 /.pnp
 .pnp.*
@@ -46,3 +45,9 @@ src/csv/
 
 # vscode
 .vscode
+
+# pdf
+scripts/generate_project_summary_pdf.py
+
+# docs
+/docs
