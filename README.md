@@ -261,38 +261,6 @@ COM5
 
 ---
 
-## Struktur Kode
-
-```text
-itbypass/
-├── app/
-│   ├── api/route/route.ts
-│   ├── components/
-│   ├── data/
-│   ├── home/
-│   ├── route/
-│   ├── search/
-│   └── splash/
-├── docs/
-│   ├── project-summary.md
-│   └── ITBypass_Project_Summary.pdf
-├── hardware/
-│   └── arduino/
-│       └── ITBypass_CSV.ino
-├── scripts/
-│   ├── generate_project_summary_pdf.py
-│   └── logging/
-│       └── logger.py
-├── src/
-│   ├── csv/
-│   └── images/
-├── test_routes.py
-├── package.json
-└── README.md
-```
-
----
-
 ## Cara Kerja Singkat Algoritma
 
 1. Frontend membuat daftar node dan edge dari data lokasi kampus.
@@ -312,23 +280,6 @@ itbypass/
 
 ---
 
-## Testing
-
-Ada file test sederhana:
-
-```text
-test_routes.py
-```
-
-File ini mengirim request ke endpoint route dan membandingkan hasil antara:
-
-- mode cepat dengan `slope_weight = 0`
-- mode landai dengan `slope_weight = 10`
-
-Tujuannya untuk memastikan bobot kemiringan dapat mengubah pilihan rute.
-
----
-
 ## Anggota
 
 | Nama                       | NIM      |
@@ -339,7 +290,7 @@ Tujuannya untuk memastikan bobot kemiringan dapat mengubah pilihan rute.
 | Fayza Kamilia              | 18225097 |
 | Lana Dzakira Cahyadi       | 18225099 |
 
----
+---W
 
 ## Lisensi
 
