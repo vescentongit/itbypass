@@ -162,6 +162,13 @@ function dijkstra(
   const pathNames = pathIndices.map((idx) => nodes[idx].name);
   const totalCost = dist[goalIdx];
 
+  if (!Number.isFinite(totalCost)) {
+    return {
+      path: ["Error: Rute tidak ditemukan"],
+      totalCost: 0,
+    };
+  }
+
   return { path: pathNames, totalCost };
 }
 

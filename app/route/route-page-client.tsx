@@ -3,7 +3,7 @@
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   type RouteApiResult,
   type RouteMode,
@@ -86,8 +86,12 @@ export function RoutePageClient() {
     if (!start || !goal) return;
 
     let cancelled = false;
-    setIsLoading(true);
-    setError("");
+
+    queueMicrotask(() => {
+      if (cancelled) return;
+      setIsLoading(true);
+      setError("");
+    });
 
     Promise.all([
       requestCampusRoute({ start, goal, mode: "fast" }),
@@ -99,13 +103,6 @@ export function RoutePageClient() {
           fast: fastRoute,
           flat: flatRoute,
         });
-
-        // Store the current selected mode's route
-        const activeRoute = selectedMode === "fast" ? fastRoute : flatRoute;
-        window.sessionStorage.setItem(
-          "itbypass:lastRoute",
-          JSON.stringify(activeRoute),
-        );
       })
       .catch((caught) => {
         if (cancelled) return;
