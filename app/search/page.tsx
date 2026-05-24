@@ -136,11 +136,17 @@ export default function SearchPage() {
         JSON.stringify(result),
       );
 
-      router.push(
-        `/route?start=${encodeURIComponent(start)}&goal=${encodeURIComponent(
-          destination,
-        )}`,
-      );
+      const routeHref = `/route?start=${encodeURIComponent(
+        start,
+      )}&goal=${encodeURIComponent(destination)}`;
+      const navigationEvent = new CustomEvent("itbypass:navigate", {
+        cancelable: true,
+        detail: { href: routeHref },
+      });
+
+      if (window.dispatchEvent(navigationEvent)) {
+        router.push(routeHref);
+      }
     } catch (caught) {
       setRouteError(
         caught instanceof Error
