@@ -164,9 +164,13 @@ export function RoutePageClient() {
             <polyline points="15 18 9 12 15 6" />
           </svg>
         </Link>
-        <h1 className="text-[22px] font-bold tracking-[-0.02em] drop-shadow-md">
+        <Link
+          href="/home"
+          aria-label="Go to home"
+          className="text-[22px] font-bold tracking-[-0.02em] drop-shadow-md transition-opacity hover:opacity-85"
+        >
           ITBypass
-        </h1>
+        </Link>
       </header>
 
       <section className="relative z-20 mt-auto rounded-t-[28px] border border-white/18 bg-[linear-gradient(to_bottom,rgba(49,52,72,0.76),rgba(2,6,23,0.96)_48%,#020617_100%)] px-5 pb-[max(24px,env(safe-area-inset-bottom))] pt-2 shadow-2xl backdrop-blur-md">

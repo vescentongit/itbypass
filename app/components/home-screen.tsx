@@ -125,9 +125,13 @@ export function HomeScreen() {
             <polyline points="15 18 9 12 15 6" />
           </svg>
         </button>
-        <h1 className="text-[22px] font-bold tracking-wide text-white drop-shadow-md">
+        <Link
+          href="/home"
+          aria-label="Go to home"
+          className="pointer-events-auto text-[22px] font-bold tracking-wide text-white drop-shadow-md transition-opacity hover:opacity-85"
+        >
           ITBypass
-        </h1>
+        </Link>
       </header>
 
       <div className="pointer-events-none relative z-10 flex flex-1" aria-hidden />
